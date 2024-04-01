@@ -1,0 +1,13 @@
+kuksa:
+  authorization: /etc/agl-vss-proxy/agl-vss-proxy.token
+  use-tls: true
+mqtt:
+  hostname:
+  port:
+  #username:
+  #password:
+  #use-tls:
+  #ca-certificate:
+  #verify-server-hostname:
+signals:
+- signal: Vehicle.Speed

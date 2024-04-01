@@ -1,0 +1,90 @@
+#
+# Global options
+#
+# Proxy client ID for MQTT payloads
+#client-id:
+#
+# Logging verbosity [0-2]
+#verbose: 0
+
+#
+# KUKSA.val options
+#
+#kuksa:
+#  Hostname of databroker server
+#  hostname: localhost
+#
+#  Databroker port number
+#  port: 55555
+#
+#  Authorization token
+#  authorization:
+#
+#  TLS support
+#  use-tls: false
+#
+#  TLS CA certificate file 
+#  ca-certificate:
+#
+#  Optional TLS server name override
+#  tls-server-name:
+
+#
+# MQTT options
+#
+#mqtt:
+#  MQTT broker server hostname
+#  hostname: localhost
+#
+#  MQTT broker port (defaults to 8883 if TLS is enabled)
+#  port: 1883
+#
+#  MQTT connection keepalive setting (seconds)
+#  keepalive: 60
+#
+#  Optional MQTT broker username
+#  username:
+#
+#  Optional MQTT broker password
+#  password:
+#
+#  MQTT connection client ID
+#  client-id:
+#
+#  MQTT clean on disconnect setting
+#  clean-on-disconnect: false
+#
+#  MQTT message topic
+#  topic:
+#
+#  MQTT message Quality of Service (QoS), 0-2
+#  qos: 1
+#
+#  MQTT message retain setting
+#  retain: true
+#
+#  TLS support
+#  use-tls: false
+#
+#  TLS CA certificate file
+#  ca-certificate:
+#
+#  TLS server hostname verification switch
+#  verify-server-hostname: true
+#
+#  TLS client certificate file (required if key is configured)
+#  client-certificate:
+#
+#  TLS client key (required if certificate is configured)
+#  client-key:
+#
+
+#
+# VSS signal configuration
+#
+signals:
+- signal: Vehicle.Speed
+# Not yet implemented:
+#  condition:
+#  period:
+#  capture:
