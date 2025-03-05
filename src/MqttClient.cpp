@@ -45,25 +45,31 @@ bool MqttClient::start()
 		}
 	}
 
-	if (m_config.useTls() && !m_config.caCertFile().empty()) {
-		std::cout << "Using MQTT TLS server certificate" << std::endl;
-		char *clientCertFile = NULL;
-		char *clientKeyFile = NULL;
-		if (!(m_config.clientCertFile().empty() || m_config.clientKeyFile().empty())) {
-			clientCertFile = strdup(m_config.clientCertFile().c_str());
-			clientKeyFile = strdup(m_config.clientKeyFile().c_str());
-			std::cout << "Using MQTT TLS client certificate" << std::endl;
-		}
-		if (mosquitto_tls_set(m_mosq,
-				      m_config.caCertFile().c_str(),
-				      NULL,
-				      clientCertFile,
-				      clientKeyFile,
-				      NULL) != MOSQ_ERR_SUCCESS) {
-			std::cerr << "Error configuring MQTT TLS support" << std::endl;
-			free(clientCertFile);
-			free(clientKeyFile);
-			return false;
+	if (m_config.useTls()) {
+		std::cout << "Using MQTT TLS" << std::endl;
+		if (!m_config.caCertFile().empty()) {
+			std::cout << "Using MQTT TLS server certificate" << std::endl;
+			char *clientCertFile = NULL;
+			char *clientKeyFile = NULL;
+			if (!(m_config.clientCertFile().empty() || m_config.clientKeyFile().empty())) {
+				clientCertFile = strdup(m_config.clientCertFile().c_str());
+				clientKeyFile = strdup(m_config.clientKeyFile().c_str());
+				std::cout << "Using MQTT TLS client certificate" << std::endl;
+			}
+			if (mosquitto_tls_set(m_mosq,
+					      m_config.caCertFile().c_str(),
+					      NULL,
+					      clientCertFile,
+					      clientKeyFile,
+					      NULL) != MOSQ_ERR_SUCCESS) {
+				std::cerr << "Error configuring MQTT TLS support" << std::endl;
+				free(clientCertFile);
+				free(clientKeyFile);
+				return false;
+			}
+		} else {
+			// Use host's CA certificates
+			mosquitto_int_option(m_mosq, MOSQ_OPT_TLS_USE_OS_CERTS, 1);
 		}
 
 		if (!m_config.verifyServerHostname()) {
