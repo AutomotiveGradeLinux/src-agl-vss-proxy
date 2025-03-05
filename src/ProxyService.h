@@ -43,11 +43,11 @@ private:
 		const SubscribeRequest *request;
 	};
 
-	GMainLoop *m_loop;
+	GMainLoop *m_loop = NULL;
 	KuksaConfig m_kuksaConfig;
-	KuksaClient *m_kuksaClient;
+	KuksaClient *m_kuksaClient = NULL;
 	MqttConfig m_mqttConfig;
-	MqttClient *m_mqttClient;
+	MqttClient *m_mqttClient = NULL;
 	SignalUpdateHandlers m_signalUpdateHandlers;
 
 	void HandleSignalChange(const std::string &path, const Datapoint &dp);
